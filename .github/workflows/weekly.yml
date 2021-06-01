@@ -4,6 +4,8 @@ on:
   schedule:
     # this script will run each Monday at 14:14
     - cron: "14 14 * * 1"
+  push:
+    branches: [gha-test-*, canary, auto]
 
 jobs:
   dep-report:
