@@ -33,6 +33,8 @@ use ref_cast::RefCast;
 use serde::{Deserialize, Serialize};
 use std::{borrow::Borrow, fmt, ops::Deref};
 
+const SELF_BYTES_SLICE: &[u8] = b"<SELF>";
+
 /// Return true if this character can appear in a Move identifier.
 ///
 /// Note: there are stricter restrictions on whether a character can begin a Move
@@ -67,7 +69,7 @@ pub const fn is_valid(s: &str) -> bool {
     // valid identifiers are (currently) ASCII-only.
     let b = s.as_bytes();
     match b {
-        b"<SELF>" => true,
+        SELF_BYTES_SLICE => true,
         [b'a'..=b'z', ..] | [b'A'..=b'Z', ..] => all_bytes_valid(b, 1),
         [b'_', ..] if b.len() > 1 => all_bytes_valid(b, 1),
         _ => false,
